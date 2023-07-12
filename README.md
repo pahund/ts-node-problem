@@ -108,8 +108,8 @@ the error again.
 
 There is a
 [GitHub issue on the ts-node repository](https://github.com/TypeStrong/ts-node/issues/935)
-regarding this problem. Some comments in the thread suggest changing the TypeScript configuration and add `"type": "module"` to
-package.json.
+regarding this problem. Some comments in the thread suggest changing the
+TypeScript configuration and add `"type": "module"` to package.json.
 
 I did this, now I get a different error message:
 
@@ -136,10 +136,10 @@ TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for /Users/
 }
 ```
 
-### Is it *ts-node*?
+### Is it _ts-node_?
 
-I tried removing *ts-node* altogether and just compiling the TypeScript code and running the resulting JavaScript code
-with *node*.
+I tried removing _ts-node_ altogether and just compiling the TypeScript code and
+running the resulting JavaScript code with _node_.
 
 ```
 git checkout no-ts-node
@@ -147,4 +147,28 @@ yarn
 yarn start
 ```
 
-Same error message – apparently, this is a general problem with TypeScript, not specifically with *ts-node*.
+Same error message – apparently, this is a general problem with TypeScript, not
+specifically with _ts-node_.
+
+### Can dynamic imports help?
+
+I found [this on StackOverflow](https://stackoverflow.com/a/75281896/1253156),
+where someone had the same problem with _node-fetch_:
+
+> You can use this line instead of "require"
+> `const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));`
+
+So they are suggesting to use a dynamic import statement, like it actually suggests in my error message:
+
+```
+Instead change the require of index.js in /Users/patrick.hund/IdeaProjects/ts-node-problem/src/index.ts to a dynamic import() which is available in all CommonJS modules.
+```
+
+Unfortunately, I couldn't get it to work.
+
+```
+git checkout dynamic-import
+yarn start
+```
+
+…same error message…
