@@ -55,9 +55,10 @@ Process finished with exit code 1
 I had a suspicion that it might be Yarn and its Plug'n'Play mode that causes the issue, so I've changed the project's
 package manager setup to use [npm](https://www.npmjs.com/) instead.
 
-If you want to try this out, check out the branch `npm`.
+If you want to try this out, check out the branch [npm](https://github.com/pahund/ts-node-problem/tree/npm).
 
 ```
+git checkout npm
 npm install
 npm run start
 ```
