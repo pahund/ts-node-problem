@@ -28,6 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@types/node", "npm:20.4.1"],\
             ["chrome-launcher", "npm:0.15.2"],\
             ["lighthouse", "npm:10.4.0"],\
             ["prettier", "npm:3.0.0"],\
@@ -1577,7 +1578,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.4"],\
-            ["@types/node", null],\
+            ["@types/node", "npm:20.4.1"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
@@ -1608,6 +1609,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["ts-node-problem", "workspace:."],\
+            ["@types/node", "npm:20.4.1"],\
             ["chrome-launcher", "npm:0.15.2"],\
             ["lighthouse", "npm:10.4.0"],\
             ["prettier", "npm:3.0.0"],\
