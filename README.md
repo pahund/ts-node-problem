@@ -47,3 +47,19 @@ Instead change the require of index.js in /Users/patrick.hund/IdeaProjects/ts-no
 
 Process finished with exit code 1
 ```
+
+## Troubleshooting
+
+### Is it Yarn?
+
+I had a suspicion that it might be Yarn and its Plug'n'Play mode that causes the issue, so I've changed the project's
+package manager setup to use [npm](https://www.npmjs.com/) instead.
+
+If you want to try this out, check out the branch `npm`.
+
+```
+npm install
+npm run start
+```
+
+The error message is the same, so **it's not Yarn**.
