@@ -1,16 +1,17 @@
-import fs from "fs";
-import lighthouse from "lighthouse";
-import chromeLauncher from "chrome-launcher";
-import type { Flags } from "lighthouse";
-
 (async () => {
+  const { default: fs } = await import("node:fs");
+  const { default: lighthouse } = await import("lighthouse");
+  const { default: chromeLauncher } = await import("chrome-launcher");
+
   const chrome = await chromeLauncher.launch({ chromeFlags: ["--headless"] });
-  const options: Flags = {
+  const options = {
     logLevel: "info",
     output: "html",
     onlyCategories: ["performance"],
     port: chrome.port,
   };
+  // TODO find a way to import interface Flags from lighthouse
+  // @ts-ignore
   const runnerResult = await lighthouse("https://example.com", options);
 
   if (!runnerResult) {
