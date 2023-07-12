@@ -87,9 +87,11 @@ In the README of chalk, there is an interesting note, though:
 > IMPORTANT: Chalk 5 is ESM. If you want to use Chalk with TypeScript or a build
 > tool, you will probably want to use Chalk 4 for now.
 
-Could this be the cause? I tried downgrading chalk to version 4 and, lo and behold, it works now!
+Could this be the cause? I tried downgrading chalk to version 4 and, lo and
+behold, it works now!
 
-Lighthouse is also ESM, so the answer to the question “Is it Lighthouse?” is: **Kind of, the problem is ESM!**
+Lighthouse is also ESM, so the answer to the question “Is it Lighthouse?” is:
+**Kind of, the problem is ESM!**
 
 You can try it out:
 
@@ -99,4 +101,39 @@ yarn install
 yarn start
 ```
 
-This works, but if your change the chalk version in package.json to 5, you get the error again.
+This works, but if your change the chalk version in package.json to 5, you get
+the error again.
+
+### TypeScript configuration
+
+There is a
+[GitHub issue on the ts-node repository](https://github.com/TypeStrong/ts-node/issues/935)
+regarding this problem. Some comments in the thread suggest changing the TypeScript configuration and add `"type": "module"` to
+package.json.
+
+I did this, now I get a different error message:
+
+```
+git checkout ts-config-change
+yarn start
+```
+
+**Result:**
+
+```
+TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for /Users/patrick.hund/IdeaProjects/ts-node-problem/src/index.ts
+    at new NodeError (node:internal/errors:405:5)
+    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:99:9)
+    at defaultGetFormat (node:internal/modules/esm/get_format:142:36)
+    at defaultLoad (node:internal/modules/esm/load:86:20)
+    at nextLoad (node:internal/modules/esm/hooks:726:28)
+    at load$1 (file:///Users/patrick.hund/IdeaProjects/ts-node-problem/.pnp.loader.mjs:1456:12)
+    at nextLoad (node:internal/modules/esm/hooks:726:28)
+    at load (/Users/patrick.hund/IdeaProjects/ts-node-problem/.yarn/__virtual__/ts-node-virtual-be91e04a9a/0/cache/ts-node-npm-10.9.1-6c268be7f4-090adff130.zip/node_modules/ts-node/dist/child/child-loader.js:19:122)
+    at nextLoad (node:internal/modules/esm/hooks:726:28)
+    at Hooks.load (node:internal/modules/esm/hooks:370:26) {
+  code: 'ERR_UNKNOWN_FILE_EXTENSION'
+}
+```
+
+
