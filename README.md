@@ -173,7 +173,7 @@ yarn start
 
 …same error message…
 
-## Not using TypeScript at all
+### Not using TypeScript at all
 
 We **can** throw out the baby with the bathwater and just resort to using plain JavaScript (with ESM modules):
 
