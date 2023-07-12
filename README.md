@@ -172,3 +172,15 @@ yarn start
 ```
 
 …same error message…
+
+## Not using TypeScript at all
+
+We **can** throw out the baby with the bathwater and just resort to using plain JavaScript (with ESM modules):
+
+```
+git checkout no-typescript
+yarn
+yarn start
+```
+
+This works, but of course, we have none of the benefits of working with TypeScript.
