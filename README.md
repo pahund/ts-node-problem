@@ -6,9 +6,11 @@ I've set up a basic command line tool to run a Google Lighthouse test
 programmatically, as
 [described in the Lighthouse documentation](https://github.com/GoogleChrome/lighthouse/blob/main/docs/readme.md).
 
-I'm using the following tools and libraries, at the latest version available at the time I've set up this repository:
+I'm using the following tools and libraries, at the latest version available at
+the time I've set up this repository:
 
-- [Node.js](https://nodejs.org/en), version 20, installed through [nvm](https://github.com/nvm-sh/nvm)
+- [Node.js](https://nodejs.org/en), version 20, installed through
+  [nvm](https://github.com/nvm-sh/nvm)
 - [Yarn](https://yarnpkg.com/) package manager, version 3, in
   [plug'n'play](https://yarnpkg.com/features/pnp#initializing-pnp) mode
 - [TypeScript](https://www.typescriptlang.org/), version 5
@@ -52,10 +54,12 @@ Process finished with exit code 1
 
 ### Is it Yarn?
 
-I had a suspicion that it might be Yarn and its Plug'n'Play mode that causes the issue, so I've changed the project's
-package manager setup to use [npm](https://www.npmjs.com/) instead.
+I had a suspicion that it might be Yarn and its Plug'n'Play mode that causes the
+issue, so I've changed the project's package manager setup to use
+[npm](https://www.npmjs.com/) instead.
 
-If you want to try this out, check out the branch [npm](https://github.com/pahund/ts-node-problem/tree/npm).
+If you want to try this out, check out the branch
+[npm](https://github.com/pahund/ts-node-problem/tree/npm).
 
 ```
 git checkout npm
@@ -64,3 +68,35 @@ npm run start
 ```
 
 The error message is the same, so **it's not Yarn**.
+
+### Is it Lighthouse?
+
+The next question I asked myself is: “is something wrong with the Lighthouse
+library that won't let it play nice with my very basic setup?”
+
+I removed the lighthouse dependency and the demo code. I added a dependency to
+the library [chalk](https://www.npmjs.com/package/chalk) instead, which can be
+used for colored console output. I replaced the lighthouse example in my script
+with a basic chalk example.
+
+Running the chalk demo produced a similar error as lighthouse,
+`Error: require() of ES Module` etc.
+
+In the README of chalk, there is an interesting note, though:
+
+> IMPORTANT: Chalk 5 is ESM. If you want to use Chalk with TypeScript or a build
+> tool, you will probably want to use Chalk 4 for now.
+
+Could this be the cause? I tried downgrading chalk to version 4 and, lo and behold, it works now!
+
+Lighthouse is also ESM, so the answer to the question “Is it Lighthouse?” is: **Kind of, the problem is ESM!**
+
+You can try it out:
+
+```
+git checkout other-libraries
+yarn install
+yarn start
+```
+
+This works, but if your change the chalk version in package.json to 5, you get the error again.
