@@ -104,7 +104,7 @@ yarn start
 This works, but if your change the chalk version in package.json to 5, you get
 the error again.
 
-### TypeScript configuration
+### Is it the TypeScript configuration?
 
 There is a
 [GitHub issue on the ts-node repository](https://github.com/TypeStrong/ts-node/issues/935)
@@ -136,4 +136,15 @@ TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for /Users/
 }
 ```
 
+### Is it *ts-node*?
 
+I tried removing *ts-node* altogether and just compiling the TypeScript code and running the resulting JavaScript code
+with *node*.
+
+```
+git checkout no-ts-node
+yarn
+yarn start
+```
+
+Same error message – apparently, this is a general problem with TypeScript, not specifically with *ts-node*.
